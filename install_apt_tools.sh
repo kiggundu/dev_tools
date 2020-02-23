@@ -1,0 +1,1 @@
+sudo apt install software-properties-common gnome-tweak-tool curl wget git terminator rbenv default-jdk kdiff3 lnav youtube-dl octave build-essential file htop libpq-dev gnome-control-center truecrypt calibre gnucash exfat-fuse exfat-utils

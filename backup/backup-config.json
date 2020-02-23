@@ -1,0 +1,12 @@
+[
+    {
+        "srcVolume":"Library",
+        "destVolume":"Library_backup",
+        "syncDeleted":true
+    },
+    {
+        "srcVolume":"media1",
+        "destVolume":"media1-backup",
+        "syncDeleted":true
+    }
+]
