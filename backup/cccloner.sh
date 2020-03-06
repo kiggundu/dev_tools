@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 INDEX=0
 CONFIG_FILE=backup-config.json
 
