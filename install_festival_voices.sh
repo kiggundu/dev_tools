@@ -15,10 +15,10 @@ cd hts_tmp/
 #sudo mv lib/voices/us/* /usr/share/festival/voices/us/
 #sudo mv lib/hts.scm /usr/share/festival/hts.scm
 
-wget http://www.speech.cs.cmu.edu/cmu_arctic/packed/cmu_us_slt_arctic-0.95-release.tar.bz2
-tar xf cmu_us_slt_arctic-0.95-release.tar.bz2
-sudo mv cmu_us_slt_arctic /usr/share/festival/voices/us/cmu_us_slt_arctic_clunits
-sudo echo "(set! voice_default 'voice_cmu_us_slt_arctic_clunits)" >> /etc/festival.scm
+#wget http://www.speech.cs.cmu.edu/cmu_arctic/packed/cmu_us_slt_arctic-0.95-release.tar.bz2
+#tar xf cmu_us_slt_arctic-0.95-release.tar.bz2
+#sudo mv cmu_us_slt_arctic /usr/share/festival/voices/us/cmu_us_slt_arctic_clunits
+#sudo echo "(set! voice_default 'voice_cmu_us_slt_arctic_clunits)" >> /etc/festival.scm
 
 #Install some more voices
 FESTIVAL_VOICES=http://festvox.org/packed/festival/2.5/voices/
@@ -44,8 +44,21 @@ wget ${FESTIVAL_VOICES}/festvox_cmu_us_slp_cg.tar.gz
 wget ${FESTIVAL_VOICES}/festvox_kallpc16k.tar.gz
 wget ${FESTIVAL_VOICES}/festvox_rablpc16k.tar.gz
 
-tar xf festvox*.gz
-sudo find . -type d -name "festvox*" -exec mv '{}' /usr/share/festival/voices/us/ \;
+find . -type f -name "festvox*" -exec tar -xvf {} \;
+sudo cp -rf festival/lib/voices/us/*  /usr/share/festival/voices/us/
+
+
+#Install arctic voices
+wget -c http://www.speech.cs.cmu.edu/cmu_arctic/packed/cmu_us_awb_arctic-0.90-release.tar.bz2
+wget -c http://www.speech.cs.cmu.edu/cmu_arctic/packed/cmu_us_bdl_arctic-0.95-release.tar.bz2
+wget -c http://www.speech.cs.cmu.edu/cmu_arctic/packed/cmu_us_clb_arctic-0.95-release.tar.bz2
+wget -c http://www.speech.cs.cmu.edu/cmu_arctic/packed/cmu_us_jmk_arctic-0.95-release.tar.bz2
+wget -c http://www.speech.cs.cmu.edu/cmu_arctic/packed/cmu_us_rms_arctic-0.95-release.tar.bz2
+wget -c http://www.speech.cs.cmu.edu/cmu_arctic/packed/cmu_us_slt_arctic-0.95-release.tar.bz2
+find . -type f -name "cmu_*.bz2" -exec tar -xvf {} \;
+find . -type d -name "cmu_*" -exec sudo mv {} {}_clunits \;
+find . -type d -name "cmu_*clunits" -exec sudo mv {} /usr/share/festival/voices/us \;
+
 
 echo "Well done Abraham. are you not just Fada? I think it's time to audiofy some books" > test.txt
 festival --tts test.txt
