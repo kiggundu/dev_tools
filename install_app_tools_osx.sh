@@ -1,4 +1,2 @@
-brew install autojump
-brew install httpie
-brew install ripgrep
-
+brew update
+HOMEBREW_NO_AUTO_UPDATE=1  brew install autojump httpie ripgrep fzf
