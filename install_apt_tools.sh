@@ -1,4 +1,4 @@
-sudo apt install software-properties-common gnome-tweak-tool curl wget git terminator rbenv default-jdk kdiff3 lnav youtube-dl octave build-essential file htop libpq-dev gnome-control-center truecrypt calibre gnucash exfat-fuse exfat-utils tidy xdotool keynav vim-gtk tree xclip pass
+sudo apt install software-properties-common gnome-tweak-tool curl wget git git-extras terminator rbenv default-jdk kdiff3 lnav youtube-dl octave build-essential file htop libpq-dev gnome-control-center truecrypt calibre gnucash exfat-fuse exfat-utils tidy xdotool keynav vim-gtk tree xclip pass
 
 #voice tools and voices
 sudo apt install festival speech-tools
