@@ -1,1 +1,1 @@
-sudo apt-get install gnuradio gr-osmosdr xterm
+sudo apt-get install  -y gnuradio gr-osmosdr xterm inspectrum
