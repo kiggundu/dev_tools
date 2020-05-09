@@ -42,8 +42,15 @@ if [[ ! -e $KALDI_ROOT/tools/srilm.tgz ]]; then
 fi
 
 #Some default config
-mkdir ${PROJECT_ROOT}/conf
+mkdir -p  ${PROJECT_ROOT}/conf
 echo "first_beam=10.0" >> ${PROJECT_ROOT}/conf/decode.config
 echo "beam=13.0" >> ${PROJECT_ROOT}/conf/decode.config
 echo "lattice_beam=6.0" >> ${PROJECT_ROOT}/conf/decode.config
 echo "--use-energy=false" >> ${PROJECT_ROOT}/conf/mfcc.config
+
+#copy the template scripts to the project directory
+cp cmd.sh ${PROJECT_ROOT}
+cp path.sh ${PROJECT_ROOT}
+cp run.sh ${PROJECT_ROOT}
+
+echo "Project ready "

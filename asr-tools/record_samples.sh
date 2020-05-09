@@ -17,19 +17,41 @@ if [ -z $5 ]; then
     exit 1
 fi
 
-PROJECT_ROOT=${KALDI_ROOT}/egs/${project}/
+PROJECT_ROOT="${KALDI_ROOT}/egs/${project}"
+
+
+validate(){
+    #Accepts $1 as an array of allowed values for $2. Exits if $2 is not one of those values.
+    #If the retrn value is not empty then $2 is valid
+    #TODO: need to work out how to use this in a whele agaist another variable ??!!??
+    for i in "${1[@]}"; do
+        if [[ $2 == $i ]]; then
+            echo "valid"
+        fi
+    done
+}
+
+getInput(){
+
+while [ -z ${value} ]
+do
+    read -p "$1" value
+done
+}
+
+name="$(getInput 'Enter Speaker ID/Name : ' )"
+gender="$(getInput 'Enter Speaker gender(m/f) : ' )"
+captureType="$(getInput 'Capture type - default is <train> (test/train)?' )"
+captureType="${captureType:-train}"
+
+AUDIO_PATH="${PROJECT_ROOT}/${project}_audio"
+mkdir -p "${AUDIO_PATH}/train" "${AUDIO_PATH}/test" "${PROJECT_ROOT}/data/local/dict" "${PROJECT_ROOT}/local"
+
+echo "${name} ${gender}" >> ${PROJECT_ROOT}/data/spk2gender
 
 START=1
 END=$noOfSamples
 i=$START
-read -p "Enter Speaker ID/Name : " name
-read -p "Enter Speaker gender(m/f) : " gender
-read -p "Data type - default is 'train' (test/train)?" captureType
-captureType="${captureType:-train}"
-
-mkdir -p ${PROJECT_ROOT}/train ${PROJECT_ROOT}/test ${PROJECT_ROOT}/data/local/dict local
-
-echo "${name} ${gender}" >> data/spk2gender
 while [ $i -le $END ]
 do
     toBeSpoken=`shuf -n $symbolsPerSample ${symbolFile} | awk '{print}' ORS=' '`
@@ -38,17 +60,17 @@ do
     echo "Say ${toBeSpoken} within ${durationOfOneSample} seconds."
     record -d ${durationOfOneSample} -f cd -t wav "${PROJECT_ROOT}/${captureType}/${name}/${fileRoot}.wav"${fileRoot}.wav &
     timer.sh ${durationOfOneSample}
-    echo "${utteranceID} ${PROJECT_ROOT}/${captureType}/${name}/${fileRoot}.wav" >> data/wav.scp
-    echo "${utteranceID} ${toBeSpoken}" >> data/text
+    echo "${utteranceID} ${PROJECT_ROOT}/${captureType}/${name}/${fileRoot}.wav" >> ${PROJECT_ROOT}/data/wav.scp
+    echo "${utteranceID} ${toBeSpoken}" >> ${PROJECT_ROOT}/data/text
     echo "${utteranceID} ${name}" >> utt2spk
-    echo "${toBeSpoken}" >> data/local/corpus.txt
+    echo "${toBeSpoken}" >> ${PROJECT_ROOT}/data/local/corpus.txt
     i=$(( i+1 ))
 done
 
 #Copy tthe scripts over
-cp -r ${PROJECT_ROOT}/wsj/utils utils
-cp -r ${PROJECT_ROOT}/wsj/steps steps
-cp -r ${PROJECT_ROOT}/voxforge/s5/local/score.sh local/score.sh
+cp -r ${KALDI_ROOT}/egs/wsj/utils ${PROJECT_ROOT}/utils
+cp -r ${KALDI_ROOT}/egs/wsj/steps ${PROJECT_ROOT}/steps
+cp -r ${KALDI_ROOT}/egs/voxforge/s5/local/score.sh ${PROJECT_ROOT}/local/score.sh
 
 
 
