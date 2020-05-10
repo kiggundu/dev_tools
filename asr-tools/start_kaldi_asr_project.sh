@@ -48,9 +48,17 @@ echo "beam=13.0" >> ${PROJECT_ROOT}/conf/decode.config
 echo "lattice_beam=6.0" >> ${PROJECT_ROOT}/conf/decode.config
 echo "--use-energy=false" >> ${PROJECT_ROOT}/conf/mfcc.config
 
+#Copy tthe scripts over
+cp -r ${KALDI_ROOT}/egs/wsj/utils ${PROJECT_ROOT}/utils
+cp -r ${KALDI_ROOT}/egs/wsj/steps ${PROJECT_ROOT}/steps
+cp -r ${KALDI_ROOT}/egs/voxforge/s5/local/score.sh ${PROJECT_ROOT}/local/score.sh
+
 #copy the template scripts to the project directory
 cp cmd.sh ${PROJECT_ROOT}
 cp path.sh ${PROJECT_ROOT}
 cp run.sh ${PROJECT_ROOT}
-
+cp ./reference.lexicon.txt ${PROJECT_ROOT}/data/local/dict/lexicon.txt
+cp ./reference.silence_phones.txt ${PROJECT_ROOT}/data/local/dict/silence_phones.txt
+cp ./reference_optional_silence.txt ${PROJECT_ROOT}/data/local/dict/optional_silence.txt
+cp ./reference.nonsilence_phones.txt ${PROJECT_ROOT}/data/local/dict/nonsilence_phones.txt
 echo "Project ready "

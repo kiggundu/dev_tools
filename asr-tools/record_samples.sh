@@ -67,11 +67,3 @@ do
     i=$(( i+1 ))
 done
 
-#Copy tthe scripts over
-cp -r ${KALDI_ROOT}/egs/wsj/utils ${PROJECT_ROOT}/utils
-cp -r ${KALDI_ROOT}/egs/wsj/steps ${PROJECT_ROOT}/steps
-cp -r ${KALDI_ROOT}/egs/voxforge/s5/local/score.sh ${PROJECT_ROOT}/local/score.sh
-
-
-
-

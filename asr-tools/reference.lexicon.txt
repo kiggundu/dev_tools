@@ -1,0 +1,61 @@
+bin b ih n
+lay l ey
+place p l ey s
+set s eh t
+red r eh d
+green g r iy n
+blue b l uw
+white w ay t
+at ae t
+by b ay
+in ih n
+with w ih dh
+a ey
+b b iy
+c s iy
+d d iy
+e iy
+f eh f
+g jh iy
+h ey ch
+i ay
+j jh ax iy
+k k ey
+l eh l
+m eh m
+n eh n
+o ow
+p p iy
+q k y uw
+r aa
+s eh s
+t t iy
+u y uw
+v v iy
+x eh k s
+y w ay
+z z eh d
+one w ah n
+two t uw
+three th r iy
+four f ao
+five f ay v
+six s ih k s
+seven s eh v n
+eight ey t
+nine n ay n
+zero z ia r ow
+again ax g eh n
+now n aw
+please p l iy z
+soon s uw n
+1 w ah n
+2 t uw
+3 th r iy
+4 f ao
+5 f ay v
+6 s ih k s
+7 s eh v n
+8 ey t
+9 n ay n
+0 z ia r ow
