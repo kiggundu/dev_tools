@@ -1,3 +1,6 @@
+#set -o nounset    # Exposes unset variables
+set -o errexit    # Used to exit upon error, avoiding cascading errors
+
 symbolsPerSample=$1 #number of symbols per sample
 durationOfOneSample=$2
 noOfSamples=$3
@@ -20,7 +23,7 @@ fi
 PROJECT_ROOT="${KALDI_ROOT}/egs/${project}"
 
 
-validate(){
+validate() {
     #Accepts $1 as an array of allowed values for $2. Exits if $2 is not one of those values.
     #If the retrn value is not empty then $2 is valid
     #TODO: need to work out how to use this in a whele agaist another variable ??!!??
@@ -31,23 +34,27 @@ validate(){
     done
 }
 
-getInput(){
-
-while [ -z ${value} ]
-do
-    read -p "$1" value
-done
+getInput() {
+    while [ -z $value ]
+    do
+        read -p "$1" value
+    done
+    echo "$value"
 }
 
+DATA_PATH="${PROJECT_ROOT}/data"
+mkdir -p "${DATA_PATH}/train" "${DATA_PATH}/test" "${DATA_PATH}/local/dict" "${PROJECT_ROOT}/local"
+
+echo "--------SPEACH CAPTURE-----------"
 name="$(getInput 'Enter Speaker ID/Name : ' )"
 gender="$(getInput 'Enter Speaker gender(m/f) : ' )"
 captureType="$(getInput 'Capture type - default is <train> (test/train)?' )"
 captureType="${captureType:-train}"
 
-AUDIO_PATH="${PROJECT_ROOT}/${project}_audio"
-mkdir -p "${AUDIO_PATH}/train" "${AUDIO_PATH}/test" "${PROJECT_ROOT}/data/local/dict" "${PROJECT_ROOT}/local"
-
 echo "${name} ${gender}" >> ${PROJECT_ROOT}/data/spk2gender
+mkdir -p "${DATA_PATH}/${captureType}/${name}"
+
+read -p "Press ENTER to start recording samples...." junk
 
 START=1
 END=$noOfSamples
@@ -57,13 +64,16 @@ do
     toBeSpoken=`shuf -n $symbolsPerSample ${symbolFile} | awk '{print}' ORS=' '`
     fileRoot=`echo $toBeSpoken | tr ' ' '_'`
     utteranceID="${name}_${fileRoot}"
-    echo "Say ${toBeSpoken} within ${durationOfOneSample} seconds."
-    record -d ${durationOfOneSample} -f cd -t wav "${PROJECT_ROOT}/${captureType}/${name}/${fileRoot}.wav"${fileRoot}.wav &
-    timer.sh ${durationOfOneSample}
-    echo "${utteranceID} ${PROJECT_ROOT}/${captureType}/${name}/${fileRoot}.wav" >> ${PROJECT_ROOT}/data/wav.scp
-    echo "${utteranceID} ${toBeSpoken}" >> ${PROJECT_ROOT}/data/text
-    echo "${utteranceID} ${name}" >> utt2spk
-    echo "${toBeSpoken}" >> ${PROJECT_ROOT}/data/local/corpus.txt
+    echo "Say '${toBeSpoken}' within ${durationOfOneSample} seconds."
+    arecord -d ${durationOfOneSample} -f cd -t wav "${DATA_PATH}/${captureType}/${name}/${fileRoot}.wav" &
+    ./timer.sh ${durationOfOneSample}
+    echo "${utteranceID} ${DATA_PATH}/${captureType}/${name}/${fileRoot}.wav" >> ${DATA_PATH}/wav.scp
+    echo "${utteranceID} ${toBeSpoken}" >> ${DATA_PATH}/text
+    echo "${utteranceID} ${name}" >> ${DATA_PATH}/${captureType}/utt2spk
+    echo "${toBeSpoken}" >> ${DATA_PATH}/local/corpus.txt
+    echo "------------------------------------------------------------"
+    echo ""
     i=$(( i+1 ))
 done
 
+echo "--------END OF SPEACH CAPTURE-----------"
