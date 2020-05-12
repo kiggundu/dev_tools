@@ -51,7 +51,7 @@ gender="$(getInput 'Enter Speaker gender(m/f) : ' )"
 captureType="$(getInput 'Capture type - default is <train> (test/train)?' )"
 captureType="${captureType:-train}"
 
-echo "${name} ${gender}" >> ${PROJECT_ROOT}/data/spk2gender
+echo "${name} ${gender}" >> ${DATA_PATH}/${captureType}/spk2gender
 mkdir -p "${DATA_PATH}/${captureType}/${name}"
 
 read -p "Press ENTER to start recording samples...." junk
@@ -67,8 +67,8 @@ do
     echo "Say '${toBeSpoken}' within ${durationOfOneSample} seconds."
     arecord -d ${durationOfOneSample} -f cd -t wav "${DATA_PATH}/${captureType}/${name}/${fileRoot}.wav" &
     ./timer.sh ${durationOfOneSample}
-    echo "${utteranceID} ${DATA_PATH}/${captureType}/${name}/${fileRoot}.wav" >> ${DATA_PATH}/wav.scp
-    echo "${utteranceID} ${toBeSpoken}" >> ${DATA_PATH}/text
+    echo "${utteranceID} ${DATA_PATH}/${captureType}/${name}/${fileRoot}.wav" >> ${DATA_PATH}/${captureType}/wav.scp
+    echo "${utteranceID} ${toBeSpoken}" >> ${DATA_PATH}/${captureType}/text
     echo "${utteranceID} ${name}" >> ${DATA_PATH}/${captureType}/utt2spk
     echo "${toBeSpoken}" >> ${DATA_PATH}/local/corpus.txt
     echo "------------------------------------------------------------"

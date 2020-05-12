@@ -75,7 +75,7 @@ mkdir -p  ${PROJECT_ROOT}/conf
 echo "first_beam=10.0" >> ${PROJECT_ROOT}/conf/decode.config
 echo "beam=13.0" >> ${PROJECT_ROOT}/conf/decode.config
 echo "lattice_beam=6.0" >> ${PROJECT_ROOT}/conf/decode.config
-echo "--use-energy=false" >> ${PROJECT_ROOT}/conf/mfcc.config
+echo "--use-energy=false" >> ${PROJECT_ROOT}/conf/mfcc.conf
 
 #Copy tthe scripts over
 cp -r ${KALDI_ROOT}/egs/wsj/s5/utils ${PROJECT_ROOT}/utils
