@@ -18,3 +18,5 @@ sudo apt install  libxtst-dev libxinerama-dev libxcb-xinerama0 libxcb-xinerama0-
 #below is required before pip install pyaudio can work. pyaudio is required for silvius mic selection
 sudo apt install portaudio19-dev
 
+sudo apt install flac #install flac decompressor
+sudo apt install swig #wraps c++ headers to make libs available to python, ruby java nad other languages
