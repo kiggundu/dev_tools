@@ -22,3 +22,5 @@ ln -s ~/.dotfiles/.gnuradio/grc.conf ~/.gnuradio/grc.conf
 mv ~/.config/fzf.zh  ~/.config/fzf.zh-backup
 ln -s ~/.dotfiles/config/fzf.zsh ~/.config/fzf.zh
 
+mv ~/.byobu  ~/.byobu-backup
+ln -s ~/.dotfiles/.byobu ~/.byobu
