@@ -20,3 +20,7 @@ sudo apt install portaudio19-dev
 
 sudo apt install flac #install flac decompressor
 sudo apt install swig #wraps c++ headers to make libs available to python, ruby java nad other languages
+
+sudo apt install vifm
+
+sudo apt install adb
