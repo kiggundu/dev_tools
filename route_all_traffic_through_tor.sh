@@ -18,7 +18,7 @@ _dns_port="53"
 _virt_addr="192.168.0.1/24"
 
 # Your outgoing interface
-_out_if="eth0"
+_out_if="wlan0"
 
 # Your incoming interface and assigned local IP (Gateway)
 _inc_if="wlan1"
@@ -35,8 +35,8 @@ _resv_iana="0.0.0.0/8 100.64.0.0/10 169.254.0.0/16 192.0.0.0/24 192.0.2.0/24 192
 #iptables -P OUTPUT ACCEPT
 
 ### Flush iptables
-iptables -F
-iptables -t nat -F
+#iptables -F
+#iptables -t nat -F
 
 ### *nat PREROUTING (For middlebox)
 iptables -t nat -A PREROUTING -d $_virt_addr -i $_inc_if -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports $_trans_port
