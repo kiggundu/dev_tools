@@ -15,7 +15,7 @@ _trans_port="9040"
 _dns_port="53"
 
 # Tor's VirtualAddrNetworkIPv4
-_virt_addr="10.192.0.0/10"
+_virt_addr="192.168.0.1/24"
 
 # Your outgoing interface
 _out_if="eth0"
@@ -58,8 +58,8 @@ for _lan in $_non_tor; do
       iptables -t nat -A OUTPUT -d $_virt_addr -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports $_trans_port
 
       # nat dns requests to Stubby but do not nat requests originating from stubby
-      iptables -t nat -A OUTPUT -m owner --uid-owner $_stubby_uid -j RETURN
       iptables -t nat -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports $_dns_port
+      iptables -t nat -A OUTPUT -m owner --uid-owner $_stubby_uid -j RETURN
 
       # Don't nat the Tor process, the loopback, or the local network
       iptables -t nat -A OUTPUT -m owner --uid-owner $_tor_uid -j RETURN
