@@ -95,7 +95,7 @@ for _lan in $_non_tor; do
           #done
 
           # Log & Drop everything else. Uncomment to enable logging.
-          #iptables -A INPUT -j LOG --log-prefix "Dropped INPUT packet: " --log-level 7 --log-uid
+          iptables -A INPUT -j LOG --log-prefix "Dropped INPUT packet: " --log-level 7 --log-uid
           iptables -A INPUT -j DROP
 
           ### *filter FORWARD
@@ -122,7 +122,7 @@ for _lan in $_non_tor; do
           #done
 
           # Log & Drop everything else. Uncomment to enable logging
-          #iptables -A OUTPUT -j LOG --log-prefix "Dropped OUTPUT packet: " --log-level 7 --log-uid
+          iptables -A OUTPUT -j LOG --log-prefix "Dropped OUTPUT packet: " --log-level 7 --log-uid
           iptables -A OUTPUT -j DROP
 
           ### Set default policies to DROP
