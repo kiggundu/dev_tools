@@ -3,7 +3,8 @@
 
 ### Set variables
 # The UID that Tor runs as (varies from system to system)
-_tor_uid="109" #As per assumption
+_tor_uid="$(id -u debian-tor)" #the computed tor user
+_stubby_uid="$(id -u stubby)" #The local stubby DNS server user
 #_tor_uid=`id -u debian-tor` #Debian/Ubuntu
 #_tor_uid=`id -u tor` #ArchLinux/Gentoo
 
