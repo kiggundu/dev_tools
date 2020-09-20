@@ -21,8 +21,8 @@ _virt_addr="10.192.0.0/10"
 _out_if="eth0"
 
 # Your incoming interface and assigned local IP (Gateway)
-_inc_if="eth1"
-_inc_ip="192.168.1.1"
+_inc_if="wlan1"
+_inc_ip="192.168.50.1"
 
 # LAN destinations that shouldn't be routed through Tor
 _non_tor="127.0.0.0/8 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16"
