@@ -9,7 +9,9 @@ _stubby_uid="$(id -u ubuntu)" #The local stubby DNS server user
 #_tor_uid=`id -u tor` #ArchLinux/Gentoo
 
 # Tor's TransPort
-_trans_port="9050"
+#_trans_port="9050"
+#Changing port to go through redsocks which socksifies before connecting to Tor
+_trans_port="12345"
 
 # Stubby secure  DNSPort
 _dns_port="53"
@@ -133,7 +135,7 @@ sudo iptables -A OUTPUT -d 127.0.0.1/32 -p tcp -m tcp --dport $_trans_port --tcp
 # Uncomment these 3 lines to enable.
 for _lan in $_non_tor; do
  sudo iptables -A OUTPUT -d $_lan -j ACCEPT
-#done
+done
 
 # Log & Drop everything else. Uncomment to enable logging
 sudo iptables -A OUTPUT -j LOG --log-prefix "Dropped OUTPUT packet: " --log-level 7 --log-uid
