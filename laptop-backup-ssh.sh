@@ -3,8 +3,8 @@ sudo umount  /media/god/BACKUPS/shared_volume
 sudo mkdir -p /media/god/BACKUPS/main_volume
 sudo mkdir -p /media/god/BACKUPS/shared_volume
 
-sudo sshfs ubuntu@192.168.0.14:/media/ubuntu/Library-11/backups/god-thinkpad-p1/main_volume /media/god/BACKUPS/main_volume
-sudo sshfs ubuntu@192.168.0.14:/media/ubuntu/Library-11/backups/god-thinkpad-p1/shared_volume /media/god/BACKUPS/shared_volume
+sudo sshfs -o nonempty ubuntu@192.168.0.14:/media/ubuntu/Library-11/backups/god-thinkpad-p1/main_volume /media/god/BACKUPS/main_volume
+sudo sshfs -o nonempty ubuntu@192.168.0.14:/media/ubuntu/Library-11/backups/god-thinkpad-p1/shared_volume /media/god/BACKUPS/shared_volume
 
 # Backup app installations
 #these can be reinstalled as follows
