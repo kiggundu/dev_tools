@@ -1,3 +1,5 @@
+git clone git@kiggys.github.com:kiggundu/dotfiles ~/.dotfiles
+
 mv ~/.oh-my-zsh/custom/profiles ~/.oh-my-zsh/custom/profiles-backup
 ln -s ~/.dotfiles/.oh-my-zsh/custom/profiles ~/.oh-my-zsh/custom/profiles
 
